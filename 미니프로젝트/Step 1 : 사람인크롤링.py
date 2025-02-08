@@ -1,3 +1,35 @@
+'''
+이 코드는 Selenium과 BeautifulSoup을 이용하여 사람인(saramin.co.kr)에서 "AI 관련 채용 공고" 데이터를 수집하고, CSV 파일로 저장하는 자동화 스크립트입니다.
+
+📌 주요 동작 과정
+웹드라이버 실행
+
+webdriver.Chrome()을 실행하여 크롬 브라우저를 엽니다.
+사람인 AI 채용 공고 페이지 이동
+
+driver.get(url)을 통해 해당 URL의 페이지로 이동한 후, time.sleep(5)로 페이지가 완전히 로딩될 때까지 기다립니다.
+HTML 페이지 소스 가져오기 및 파싱
+
+driver.page_source로 페이지 HTML을 가져온 후, BeautifulSoup을 사용하여 HTML을 파싱합니다.
+CSV 파일 생성 및 헤더 작성
+
+'saramin_jobs.csv3' 파일을 생성하고, **헤더(회사이름, 채용정보, 채용조건, Job Sector)**를 추가합니다.
+채용 공고 데이터 크롤링
+
+soup.find('div', class_='list_body')에서 공고 리스트를 찾고,
+각 div.box_item 요소에서
+회사 이름 (company_nm)
+채용 정보 (job_tit)
+채용 조건 (recruit_info)
+직무 분야 (job_sector)
+를 추출합니다.
+CSV 파일 저장
+
+추출한 데이터를 CSV 파일에 한 줄씩 저장합니다.
+브라우저 종료
+
+driver.quit()을 호출하여 크롤링이 끝나면 크롬 브라우저를 닫습니다.
+'''
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import collections
